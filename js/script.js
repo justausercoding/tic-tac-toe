@@ -4,6 +4,8 @@ function createPlayer(userName, symbol) {
 
 function gameBoard(user1, user2) {
     // -- attributes --
+    let currentUser = user1;
+
     let board = [
         0, 0, 0, 
         0, 0, 0, 
@@ -14,23 +16,31 @@ function gameBoard(user1, user2) {
         colOne: 0, colTwo: 0, colThree: 0,
         diagOne: 0, diagTwo: 0
     };
-    let currentUser = null;
     
-    // -- functions --
-    let setCurrentUser = (user) => {
-        // ...
+    // -- methods --
+    let setCurrentUser = () => {
+        currentUser = (currentUser == user1) ? user2 : user1;
     };
 
-    let makeMove = (position, user) => {
-        if (user == user1) {
-            board[position] = 1;
-        } else {
-            board[position] = -1;
+    let getCurrentUser = () => {
+        return currentUser;
+    }
+
+    let setBoard = (position, user) => {
+        if (board[position] == 0) {
+            if (user == user1) {
+                board[position] = 1;
+            } else {
+                board[position] = -1;
+            }
         }
     };
+
+    let getBoard = () => {
+        return board;
+    }
     
-    let setBoardPoints = () => {
-        // set the points each row has        
+    let setBoardPoints = () => {    
         // rows
         boardPoints["rowOne"] = board[0] + board[1] + board[2];
         boardPoints["rowTwo"] = board[3] + board[4] + board[5];
@@ -44,8 +54,13 @@ function gameBoard(user1, user2) {
         boardPoints["diagTwo"] = board[2] + board[4] + board[6];
     };
     
+    let getBoardPoints = () => {
+        return boardPoints;
+    }
+    
     let checkWinner = () => {
         // check if there is a winner
+        setBoardPoints();
         for (let i in boardPoints) {
             if (boardPoints[i] == 3) {
                 return "player1";
@@ -53,7 +68,7 @@ function gameBoard(user1, user2) {
                 return "player2";
             }
         }
-        // check if is a draw or there is no winner
+        // check if it is a draw or there is no winner
         if (!(board.includes(0))) {
             return "draw";
         } else {
@@ -62,33 +77,54 @@ function gameBoard(user1, user2) {
     };
     
     return {
-        board,
-        boardPoints,
-        currentUser,
         setCurrentUser,
-        makeMove,
+        getCurrentUser,
+        setBoard,
+        getBoard,
         setBoardPoints,
+        getBoardPoints,
         checkWinner,
     };
 }
 
-const player1 = createPlayer(prompt("Player 1 - Enter your name: "),"X");
-const player2 = createPlayer(prompt("Player 2 - Enter your name: "), "O");
-console.log(player1, player2);
+function changeHtml() {
+    let spaces = document.querySelectorAll("button[data-index]");
+
+    let writeHtmlSpaces = (board) => {
+        spaces.forEach((oneSpace, index) => {
+            valueInArray = board[index];
+            if (valueInArray == 1) {
+                oneSpace.textContent = "X";
+            } else if (valueInArray == -1) {
+                oneSpace.textContent = "O";
+            }
+        })
+    }
+
+    let addHtmlListenerSpaces = (game) => {
+        spaces.forEach((oneSpace) => {
+            oneSpace.addEventListener("click", (e) => {
+                let index = e.currentTarget.getAttribute("data-index");
+
+                // adds the new item to the array that represents the board
+                game.setBoard(index, game.getCurrentUser());
+                // writes the updated array to the website
+                writeHtmlSpaces(game.getBoard());
+                game.setCurrentUser();
+                console.log("Winner: ", game.checkWinner());
+            })
+        })
+    };
+
+    return {writeHtmlSpaces, addHtmlListenerSpaces};
+}
+// const player1 = createPlayer(prompt("Player 1 - Enter your name: "),"X");
+// const player2 = createPlayer(prompt("Player 2 - Enter your name: "), "O");
+const player1 = createPlayer("One","X");
+const player2 = createPlayer("Two", "O");
 
 const game = gameBoard(player1, player2);
-let currentPlayer = player2;
-let currentMove;
+const website = changeHtml()
 
-
-while (game.checkWinner() == "continue game") {
-    console.log("---\n");
-    currentPlayer = (currentPlayer == player1) ? player2 : player1;
-    console.log(`current player: ${currentPlayer.symbol}`);
-    currentMove = Number(prompt("Move?"));
-    game.makeMove(currentMove, currentPlayer);
-    game.setBoardPoints();
-    console.log(game.board);
-}
-
-console.log(`game finished: ${game.checkWinner()}`);
+website.writeHtmlSpaces(game.getBoard());
+website.addHtmlListenerSpaces(game);
