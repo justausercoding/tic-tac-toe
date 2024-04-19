@@ -18,3 +18,22 @@ button, input, label {
 }
 
 /* ---- PROJECT ----*/
+
+body {
+    display: flex;
+    flex-direction: column;
+    
+    .row {
+        display: flex;
+
+
+        .field {
+            height: 100px;
+            width: 100px;
+            padding: 10px;
+
+            font-size: 3rem;
+        }
+    }
+}
+
