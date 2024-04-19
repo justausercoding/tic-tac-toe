@@ -17,11 +17,11 @@ function gameBoard(user1, user2) {
     let currentUser = null;
     
     // -- functions --
-    let setCurrentUser = () => {
-        // return which user is now the turn
+    let setCurrentUser = (user) => {
+        // ...
     };
 
-    let setGameBoard = (position, user) => {
+    let makeMove = (position, user) => {
         if (user == user1) {
             board[position] = 1;
         } else {
@@ -66,7 +66,7 @@ function gameBoard(user1, user2) {
         boardPoints,
         currentUser,
         setCurrentUser,
-        setGameBoard,
+        makeMove,
         setBoardPoints,
         checkWinner,
     };
@@ -74,5 +74,21 @@ function gameBoard(user1, user2) {
 
 const player1 = createPlayer(prompt("Player 1 - Enter your name: "),"X");
 const player2 = createPlayer(prompt("Player 2 - Enter your name: "), "O");
+console.log(player1, player2);
 
-const gb = gameBoard(player1, player2);
+const game = gameBoard(player1, player2);
+let currentPlayer = player2;
+let currentMove;
+
+
+while (game.checkWinner() == "continue game") {
+    console.log("---\n");
+    currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    console.log(`current player: ${currentPlayer.symbol}`);
+    currentMove = Number(prompt("Move?"));
+    game.makeMove(currentMove, currentPlayer);
+    game.setBoardPoints();
+    console.log(game.board);
+}
+
+console.log(`game finished: ${game.checkWinner()}`);
