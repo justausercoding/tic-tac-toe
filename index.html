@@ -8,6 +8,8 @@
     <script src="./js/script.js" defer></script>
 </head>
 <body>
+    <h1 class="">Tic tac toe</h1>
+    <div class="message"></div>
     <div class="row">
         <button class="field" data-index="0"></button>
         <button class="field" data-index="1"></button>
@@ -23,6 +25,21 @@
         <button class="field" data-index="7"></button>
         <button class="field" data-index="8"></button>
     </div> 
-
+    <div>
+        <button class="restart">Restart</button>
+    </div>
+    <dialog id="dialog">
+        <form action="post" method="dialog">
+            <div>
+                <label for="form-player1">Player 1</label>
+                <input type="text" name="player1" id="form-player1" value="Player 1" autofocus>
+            </div>
+            <div>
+                <label for="form-player2">Player 2</label>
+                <input type="text" name="player2" id="form-player2" value="Player 2">
+            </div>
+            <div><button type="submit">Start Game</button></div>
+        </form>
+    </dialog>
 </body>
 </html>
