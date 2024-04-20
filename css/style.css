@@ -22,6 +22,10 @@ button, input, label {
 body {
     display: flex;
     flex-direction: column;
+
+    .message {
+        height: 20px;
+    }
     
     .row {
         display: flex;
@@ -34,6 +38,18 @@ body {
 
             font-size: 3rem;
         }
+
+        .winner {
+            background-color: aquamarine;
+        }
+
+        .no-event {
+            pointer-events: none;
+        }
+    }
+
+    .restart {
+        
     }
 }
 
