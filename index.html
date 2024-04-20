@@ -8,22 +8,22 @@
     <script src="./js/script.js" defer></script>
 </head>
 <body>
-    <h1 class="">Tic tac toe</h1>
+    <h1 class="title">Tic tac toe</h1>
     <div class="message"></div>
     <div class="row">
-        <button class="field" data-index="0"></button>
-        <button class="field" data-index="1"></button>
-        <button class="field" data-index="2"></button>
+        <button class="field right-bottom" data-index="0"></button>
+        <button class="field right-bottom-left" data-index="1"></button>
+        <button class="field bottom-left" data-index="2"></button>
     </div>
     <div class="row">
-        <button class="field" data-index="3"></button>
-        <button class="field" data-index="4"></button>
-        <button class="field" data-index="5"></button>
+        <button class="field top-right-bottom" data-index="3"></button>
+        <button class="field top-right-bottom-left" data-index="4"></button>
+        <button class="field top-bottom-left" data-index="5"></button>
     </div>
     <div class="row">
-        <button class="field" data-index="6"></button>
-        <button class="field" data-index="7"></button>
-        <button class="field" data-index="8"></button>
+        <button class="field top-right" data-index="6"></button>
+        <button class="field top-right-left" data-index="7"></button>
+        <button class="field top-left" data-index="8"></button>
     </div> 
     <div>
         <button class="restart">Restart</button>
@@ -38,7 +38,7 @@
                 <label for="form-player2">Player 2</label>
                 <input type="text" name="player2" id="form-player2" value="Player 2">
             </div>
-            <div><button type="submit">Start Game</button></div>
+            <div><button type="submit" class="submit">Start Game</button></div>
         </form>
     </dialog>
 </body>
