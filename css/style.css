@@ -10,6 +10,7 @@
 body {
     min-height: 100vh;
     line-height: 1.5;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 h1, h2, h3, h4,
@@ -18,38 +19,188 @@ button, input, label {
 }
 
 /* ---- PROJECT ----*/
+:root {
+    --border:  0.5px solid grey;
+    --color-emphasis: rgb(255, 7, 48);
+}
 
+/* Position of the main elements */
 body {
     display: flex;
     flex-direction: column;
-
-    .message {
-        height: 20px;
-    }
-    
-    .row {
-        display: flex;
-
-
-        .field {
-            height: 100px;
-            width: 100px;
-            padding: 10px;
-
-            font-size: 3rem;
-        }
-
-        .winner {
-            background-color: aquamarine;
-        }
-
-        .no-event {
-            pointer-events: none;
-        }
-    }
-
-    .restart {
-        
+    align-items: center;
+    & #dialog {
+        justify-self: center;
+        align-self: center;
     }
 }
 
+.title {
+    font-size: 2.7rem;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.message {
+    height: 30px;
+    font-size: 0.9rem;
+    font-weight: 100px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    padding: 10px;
+    color: var(--color-emphasis)
+}
+
+.row {
+    display: flex;
+
+    & .field {
+        height: 100px;
+        width: 100px;
+        padding: 10px;
+        font-size: 3rem;
+        background-color: white;
+    }
+
+    /* borders top row*/
+    & .right-bottom {
+        border-top: none;
+        border-right: var(--border);
+        border-bottom: var(--border);
+        border-left: none;
+    }
+    & .right-bottom-left {
+        border-top: none;
+        border-right: var(--border);
+        border-bottom: var(--border);
+        border-left: var(--border);
+    }
+    & .bottom-left {
+        border-top: none;
+        border-right: none;
+        border-bottom: var(--border);
+        border-left: var(--border);
+    }
+    /* borders middle row*/
+    & .top-right-bottom {
+        border-top: var(--border);
+        border-right: var(--border);
+        border-bottom: var(--border);
+        border-left:none;
+    }
+    & .top-right-bottom-left {
+        border-top: var(--border);
+        border-right: var(--border);
+        border-bottom: var(--border);
+        border-left: var(--border);
+    }
+    & .top-bottom-left {
+        border-top: var(--border);
+        border-right:none;
+        border-bottom: var(--border);
+        border-left: var(--border);
+    }
+    /* borders bottom row*/
+    & .top-right {
+        border-top: var(--border);
+        border-right: var(--border);
+        border-bottom: none;
+        border-left: none;
+    }
+    & .top-right-left {
+        border-top: var(--border);
+        border-right: var(--border);
+        border-bottom: none;
+        border-left: var(--border);
+    }
+    & .top-left {
+        border-top: var(--border);
+        border-right: none;
+        border-bottom: none;
+        border-left: var(--border);
+    }
+
+    & .winner {
+        color: var(--color-emphasis)
+        /* background-color: aquamarine; */
+    }
+
+    & .no-event {
+        pointer-events: none;
+    }
+}
+
+.restart {
+    color: black;
+    background-color: white;
+    border: 0.5px solid grey;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 40px;
+}
+
+.restart:hover {
+    color: var(--color-emphasis);
+    border: 0.5px solid var(--color-emphasis);
+}
+
+#dialog {
+    border: none;
+    border-radius: 10px;
+    margin: 0px;
+    padding: 5px 5px 2px 5px;
+}
+
+#dialog::backdrop {
+    background-color: grey;
+    opacity: 80%;
+}
+
+form {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr) 2fr;
+    margin: 10px 10px 0px 10px;
+    & div { 
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+
+        & label {
+            color: black;
+            padding-right: 10px;
+            font-size: 0.9rem;
+            align-self: center;
+            justify-self: end;
+        }
+
+        & input {
+            padding: 5px;
+            margin: 5px;
+            outline: none;
+            border: 1px solid grey;
+            border-radius: 5px;
+        }
+
+        & input:focus {
+            outline: none;
+            border: 1px solid var(--color-emphasis);
+            border-radius: 5px;
+        }
+
+        & .submit {
+            grid-column: 1 / 3;
+            justify-self: center;
+            align-self: center;
+
+            color: black;
+            background-color: white;
+            border: 0.5px solid grey;
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        & .submit:hover {
+            color: var(--color-emphasis);
+            border: 0.5px solid var(--color-emphasis);
+        }
+    };
+}
