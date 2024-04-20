@@ -122,7 +122,7 @@ function changeHtml() {
         spaces.forEach((oneSpace, index) => {
             valueInArray = board[index];
             if (valueInArray == 1) {
-                oneSpace.textContent = "X";
+                oneSpace.textContent = "✕";
             } else if (valueInArray == -1) {
                 oneSpace.textContent = "O";
             } else {
